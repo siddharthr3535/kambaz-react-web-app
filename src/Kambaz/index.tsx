@@ -6,7 +6,7 @@ import Dashboard from './Dashboard';
 export default function Kambaz() {
   return (
     <div id="wd-kambaz">
-      <a href="https://github.com/siddharthr3535/kambaz-react-web-app">Siddharth's Github</a>
+      <a id="wd-github" href="https://github.com/siddharthr3535/kambaz-react-web-app">Siddharth's Github</a>
       <table>
         <tr>
           <td valign="top">
