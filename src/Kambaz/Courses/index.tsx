@@ -19,8 +19,8 @@ export default function Courses() {
               <Route path="/" element={<Navigate to="Home" />} />
               <Route path="Home" element={<Home />} />
               <Route path="Modules" element={<Modules />} />
-              <Route path="Assignments" element={<Assignments/>} />
-              <Route path="Assignments/:aid" element={<AssignmentEditor/>} />
+              <Route path="Assignments" element={<Assignments />} />
+              <Route path="Assignments/:aid" element={<AssignmentEditor />} />
               <Route path="People" element={<h2>People</h2>} />
             </Routes>
           </td>

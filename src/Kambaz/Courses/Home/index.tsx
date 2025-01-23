@@ -1,4 +1,3 @@
-
 import Modules from "../Modules";
 import CourseStatus from "./Status";
 export default function Home() {
@@ -13,4 +12,5 @@ export default function Home() {
         </td>
       </tr>
     </table>
-);}
+  );
+}

@@ -9,4 +9,5 @@ export default function Lab1() {
       </div>
       {/* do the next exercise here */}
     </div>
-);}
+  );
+}
