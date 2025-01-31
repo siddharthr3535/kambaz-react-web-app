@@ -35,6 +35,8 @@ export default function AssignmentEditor() {
               <input id="wd-points" type="number" defaultValue={100} />
             </td>
           </tr>
+          <br></br>
+          <br></br>
 
           <tr>
             <td align="right">
@@ -49,7 +51,8 @@ export default function AssignmentEditor() {
               </select>
             </td>
           </tr>
-
+          <br></br>
+          <br></br>
           <tr>
             <td align="right">
               <label htmlFor="wd-display-grade-as">Display Grade as</label>
@@ -62,7 +65,8 @@ export default function AssignmentEditor() {
               </select>
             </td>
           </tr>
-
+          <br></br>
+          <br></br>
           <tr>
             <td align="right" valign="top">
               <label htmlFor="wd-submission-type">Submission Type</label>
@@ -73,7 +77,10 @@ export default function AssignmentEditor() {
                 <option>On Paper</option>
               </select>
               <br />
+
               <div style={{ marginLeft: "20px" }}>
+                Online Entry Options
+                <br />
                 <label htmlFor="wd-text-entry">
                   <input id="wd-text-entry" type="checkbox" /> Text Entry
                 </label>
@@ -98,12 +105,16 @@ export default function AssignmentEditor() {
               </div>
             </td>
           </tr>
-
+          <br></br>
+          <br></br>
           <tr>
             <td align="right">
-              <label htmlFor="wd-assign-to">Assign to</label>
+              <label htmlFor="wd-assign-to">Assign Assign to</label>
             </td>
             <td>
+              <br />
+              <br />
+              <br />
               <input id="wd-assign-to" defaultValue="Everyone" />
             </td>
           </tr>
@@ -137,7 +148,7 @@ export default function AssignmentEditor() {
           </tr>
         </tbody>
       </table>
-
+      <hr></hr>
       <br />
       <div>
         <button>Cancel</button>
