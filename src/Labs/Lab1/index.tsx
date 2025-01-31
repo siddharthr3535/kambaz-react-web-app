@@ -80,6 +80,9 @@ export default function Lab1() {
         <ul id="wd-your-books">
           <li>Harry potter</li>
           <li>Lord of the Rings</li>
+          <li>Jeffrey Archer</li>
+          <li>Chetan bhagat</li>
+          <li>Green mile</li>
         </ul>
       </div>
       <div id="wd-tables">
@@ -130,11 +133,35 @@ export default function Lab1() {
               <td>3/10/21</td>
               <td>89</td>
             </tr>
+            <tr>
+              <td>Q7</td>
+              <td>SQL</td>
+              <td>3/17/21</td>
+              <td>91</td>
+            </tr>
+            <tr>
+              <td>Q8</td>
+              <td>Java</td>
+              <td>3/24/21</td>
+              <td>86</td>
+            </tr>
+            <tr>
+              <td>Q9</td>
+              <td>C++</td>
+              <td>3/31/21</td>
+              <td>89</td>
+            </tr>
+            <tr>
+              <td>Q10</td>
+              <td>Data Structures</td>
+              <td>4/7/21</td>
+              <td>90</td>
+            </tr>
           </tbody>
           <tfoot>
             <tr>
               <td colSpan={3}>Average</td>
-              <td>88.5</td>
+              <td>88.7</td>
             </tr>
           </tfoot>
         </table>
@@ -291,13 +318,6 @@ export default function Lab1() {
         </a>
         to get dummy text
         <br />
-        Siddharth's Github:
-        <a
-          id="wd-github"
-          href="https://github.com/siddharthr3535/kambaz-react-web-app"
-        >
-          Siddharth's Github
-        </a>
       </div>
     </div>
   );
