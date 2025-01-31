@@ -228,15 +228,6 @@ export default function Lab1() {
         <br />
         <input type="checkbox" name="check-genre" id="wd-chkbox-fantasy" />
         <label htmlFor="wd-chkbox-fantasy">Fantasy</label>
-        <select multiple>
-          <option value="VAL1" selected>
-            Value 1
-          </option>
-          <option value="VAL2">Value 2</option>
-          <option value="VAL3" selected>
-            Value 3
-          </option>
-        </select>
         <h4 id="wd-dropdowns">Dropdowns</h4>
         <h5>Select one</h5>
         <label htmlFor="wd-select-one-genre"> Favorite movie genre: </label>
