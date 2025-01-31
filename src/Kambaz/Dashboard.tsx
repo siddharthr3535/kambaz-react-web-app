@@ -72,7 +72,7 @@ export default function Dashboard() {
             to="/Kambaz/Courses/1415/Home"
             className="wd-dashboard-course-link"
           >
-            <img src="/images/java.png" width={200} />
+            <img src="./images/java.png" width={200} />
             <div>
               <h5>CS1415 Java Fundamentals</h5>
               <p className="wd-dashboard-course-title">
@@ -87,7 +87,7 @@ export default function Dashboard() {
             to="/Kambaz/Courses/1617/Home"
             className="wd-dashboard-course-link"
           >
-            <img src="/images/htmlcss.png" width={200} />
+            <img src="./images/htmlcss.png" width={200} />
             <div>
               <h5>CS1617 HTML & CSS</h5>
               <p className="wd-dashboard-course-title">Web Design Basics</p>
@@ -100,7 +100,7 @@ export default function Dashboard() {
             to="/Kambaz/Courses/1819/Home"
             className="wd-dashboard-course-link"
           >
-            <img src="/images/mongodb.png" width={200} />
+            <img src="./images/mongodb.png" width={200} />
             <div>
               <h5>CS1819 MongoDB</h5>
               <p className="wd-dashboard-course-title">
