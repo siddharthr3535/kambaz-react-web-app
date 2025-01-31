@@ -84,7 +84,7 @@ export default function Lab1() {
       </div>
       <div id="wd-tables">
         <h4>Table Tag</h4>
-        <table border="1" width="100%">
+        <table border={1} width="100%">
           <thead>
             <tr>
               <th>Quiz</th>
