@@ -48,7 +48,7 @@ export default function Assignments() {
             A3 - JAVASCRIPT + REACT
           </a>
           <div className="wd-assignment-details">
-            Multiple Modules | <b>Not available until May 20 at 12:00am</b>
+            Multiple Modules | <b>Not available until </b>May 20 at 12:00am
             <br />
             <b>Due</b> May 27 at 11:59pm| 100 pts
           </div>
