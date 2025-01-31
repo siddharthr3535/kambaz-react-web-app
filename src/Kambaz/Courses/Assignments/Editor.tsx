@@ -124,10 +124,14 @@ export default function AssignmentEditor() {
               <label htmlFor="wd-due-date">Due</label>
             </td>
             <td>
+              <br />
+              <br />
+              <br />
               <input id="wd-due-date" type="date" defaultValue="2024-05-13" />
             </td>
           </tr>
-
+          <br></br>
+          <br></br>
           <tr>
             <td align="right">
               <label htmlFor="wd-available-from">Available from</label>
