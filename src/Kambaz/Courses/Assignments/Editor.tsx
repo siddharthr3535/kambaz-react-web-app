@@ -36,8 +36,6 @@ export default function AssignmentEditor() {
             </td>
           </tr>
           <br></br>
-          <br></br>
-
           <tr>
             <td align="right">
               <label htmlFor="wd-group">Assignment Group</label>
@@ -52,7 +50,6 @@ export default function AssignmentEditor() {
             </td>
           </tr>
           <br></br>
-          <br></br>
           <tr>
             <td align="right">
               <label htmlFor="wd-display-grade-as">Display Grade as</label>
@@ -66,7 +63,6 @@ export default function AssignmentEditor() {
             </td>
           </tr>
           <br></br>
-          <br></br>
           <tr>
             <td align="right" valign="top">
               <label htmlFor="wd-submission-type">Submission Type</label>
@@ -77,8 +73,8 @@ export default function AssignmentEditor() {
                 <option>On Paper</option>
               </select>
               <br />
-
-              <div style={{ marginLeft: "20px" }}>
+              <br />
+              <div>
                 Online Entry Options
                 <br />
                 <label htmlFor="wd-text-entry">
@@ -106,58 +102,69 @@ export default function AssignmentEditor() {
             </td>
           </tr>
           <br></br>
-          <br></br>
           <tr>
-            <td align="right">
-              <label htmlFor="wd-assign-to">Assign Assign to</label>
+            <td align="right" valign="top">
+              <label htmlFor="wd-assign-to">Assign</label>
             </td>
             <td>
-              <br />
-              <br />
+              Assign to
               <br />
               <input id="wd-assign-to" defaultValue="Everyone" />
             </td>
           </tr>
-
+          <br />
           <tr>
-            <td align="right">
-              <label htmlFor="wd-due-date">Due</label>
-            </td>
+            <td></td>
             <td>
-              <br />
-              <br />
+              <label htmlFor="wd-due-date">Due</label>
               <br />
               <input id="wd-due-date" type="date" defaultValue="2024-05-13" />
             </td>
           </tr>
           <br></br>
-          <br></br>
           <tr>
-            <td align="right">
-              <label htmlFor="wd-available-from">Available from</label>
+            <td></td>
+            <table>
+              <tr>
+                <td>
+                  <label htmlFor="wd-available-from">Available from</label>
+                </td>
+                <td>
+                  <label htmlFor="wd-available-until"> Until </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    id="wd-available-from"
+                    type="date"
+                    defaultValue="2024-05-06"
+                  />
+                </td>
+                <td>
+                  <input
+                    id="wd-available-until"
+                    type="date"
+                    defaultValue="2024-05-20"
+                  />
+                </td>
+              </tr>
+            </table>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <hr />
             </td>
-            <td>
-              <input
-                id="wd-available-from"
-                type="date"
-                defaultValue="2024-05-06"
-              />
-              <label htmlFor="wd-available-until"> Until </label>
-              <input
-                id="wd-available-until"
-                type="date"
-                defaultValue="2024-05-20"
-              />
+          </tr>
+          <tr>
+            <td align="right" colSpan={2}>
+              <button>Cancel</button>
+              <button>Save</button>
             </td>
           </tr>
         </tbody>
       </table>
-      <hr></hr>
       <br />
-      <div>
-        <button>Cancel</button>
-        <button>Save</button>
-      </div>
     </div>
   );
 }
