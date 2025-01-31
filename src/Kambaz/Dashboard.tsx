@@ -12,7 +12,7 @@ export default function Dashboard() {
             to="/Kambaz/Courses/1234/Home"
             className="wd-dashboard-course-link"
           >
-            <img src="/images/reactjs.png" width={200} />
+            <img src="images/reactjs.png" width={200} />
             <div>
               <h5>CS1234 React JS</h5>
               <p className="wd-dashboard-course-title">
@@ -27,7 +27,7 @@ export default function Dashboard() {
             to="/Kambaz/Courses/5678/Home"
             className="wd-dashboard-course-link"
           >
-            <img src="/images/nodejs.png" width={200} />
+            <img src="images/nodejs.png" width={200} />
             <div>
               <h5>CS5678 Node JS</h5>
               <p className="wd-dashboard-course-title">
@@ -57,7 +57,7 @@ export default function Dashboard() {
             to="/Kambaz/Courses/1123/Home"
             className="wd-dashboard-course-link"
           >
-            <img src="/images/python.png" width={200} />
+            <img src="images/python.png" width={200} />
             <div>
               <h5>CS1123 Python Programming</h5>
               <p className="wd-dashboard-course-title">
