@@ -7,6 +7,13 @@ export default function Labs() {
   return (
     <div>
       <h2>Siddharth Ramachandran</h2>
+      Siddharth's Github:
+      <a
+        id="wd-github"
+        href="https://github.com/siddharthr3535/kambaz-react-web-app"
+      >
+        Siddharth's Github
+      </a>
       <h1>Labs</h1>
       <TOC />
       <Routes>
