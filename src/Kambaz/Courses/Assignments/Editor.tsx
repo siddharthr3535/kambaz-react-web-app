@@ -43,6 +43,9 @@ export default function AssignmentEditor() {
             <td>
               <select id="wd-group">
                 <option>ASSIGNMENTS</option>
+                <option>QUIZZES</option>
+                <option>EXAMS</option>
+                <option>PROJECTS</option>
               </select>
             </td>
           </tr>
@@ -54,6 +57,8 @@ export default function AssignmentEditor() {
             <td>
               <select id="wd-display-grade-as">
                 <option>Percentage</option>
+                <option>Points</option>
+                <option>Letter Grade</option>
               </select>
             </td>
           </tr>
@@ -65,6 +70,7 @@ export default function AssignmentEditor() {
             <td>
               <select id="wd-submission-type">
                 <option>Online</option>
+                <option>On Paper</option>
               </select>
               <br />
               <div style={{ marginLeft: "20px" }}>
