@@ -1,127 +1,153 @@
 import { Link } from "react-router-dom";
+
 export default function Dashboard() {
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1>
       <hr />
-      <h2 id="wd-dashboard-published">Published Courses (12)</h2>
+      <h2 id="wd-dashboard-published">Published Courses (7)</h2>
       <hr />
-      <div id="wd-dashboard-courses">
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/1234/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="./images/reactjs.png" width={200} />
-            <div>
-              <h5>CS1234 React JS</h5>
-              <p className="wd-dashboard-course-title">
-                Full Stack Software Developer
-              </p>
-              <button>Go</button>
+      <div id="wd-dashboard-courses" className="row">
+        <div className="row row-cols-1 row-cols-md-5 g-4">
+          <div className="wd-dashboard-course" style={{ width: "270px" }}>
+            <div className="card rounded-3 overflow-hidden">
+              <Link
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                to="/Kambaz/Courses/1234/Home"
+              >
+                <img src="/images/reactjs.png" width="100%" height={160} />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1234 <br /> React JS
+                  </h5>
+                  <p className="wd-dashboard-course-description card-text">
+                    Full Stack software developer
+                  </p>
+                  <button className="btn btn-primary">Go</button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/5678/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="./images/nodejs.png" width={200} />
-            <div>
-              <h5>CS5678 Node JS</h5>
-              <p className="wd-dashboard-course-title">
-                Backend Development Essentials
-              </p>
-              <button>Go</button>
+          </div>
+
+          <div className="wd-dashboard-course" style={{ width: "270px" }}>
+            <div className="card rounded-3 overflow-hidden">
+              <Link
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                to="/Kambaz/Courses/1235/Home"
+              >
+                <img src="/images/python.png" width="100%" height={160} />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1235 <br /> Python
+                  </h5>
+                  <p className="wd-dashboard-course-description card-text">
+                    Backend Development
+                  </p>
+                  <button className="btn btn-primary">Go</button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/9101/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/angular.png" width={200} />
-            <div>
-              <h5>CS9101 Angular</h5>
-              <p className="wd-dashboard-course-title">
-                Frontend Framework Mastery
-              </p>
-              <button>Go</button>
+          </div>
+
+          <div className="wd-dashboard-course" style={{ width: "270px" }}>
+            <div className="card rounded-3 overflow-hidden">
+              <Link
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                to="/Kambaz/Courses/1236/Home"
+              >
+                <img src="/images/htmlcss.png" width="100%" height={160} />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1236 <br /> Web Dev
+                  </h5>
+                  <p className="wd-dashboard-course-description card-text">
+                    Software Development
+                  </p>
+                  <button className="btn btn-primary">Go</button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/1123/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="./images/python.png" width={200} />
-            <div>
-              <h5>CS1123 Python Programming</h5>
-              <p className="wd-dashboard-course-title">
-                Programming Foundations
-              </p>
-              <button>Go</button>
+          </div>
+
+          <div className="wd-dashboard-course" style={{ width: "270px" }}>
+            <div className="card rounded-3 overflow-hidden">
+              <Link
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                to="/Kambaz/Courses/1237/Home"
+              >
+                <img src="/images/nodejs.png" width="100%" height={160} />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1237 <br /> Node JS
+                  </h5>
+                  <p className="wd-dashboard-course-description card-text">
+                    Full Stack software developer
+                  </p>
+                  <button className="btn btn-primary">Go</button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/1415/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="./images/java.png" width={200} />
-            <div>
-              <h5>CS1415 Java Fundamentals</h5>
-              <p className="wd-dashboard-course-title">
-                Object-Oriented Programming
-              </p>
-              <button>Go</button>
+          </div>
+
+          <div className="wd-dashboard-course" style={{ width: "270px" }}>
+            <div className="card rounded-3 overflow-hidden">
+              <Link
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                to="/Kambaz/Courses/1238/Home"
+              >
+                <img src="/images/devops.png" width="100%" height={160} />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1238 <br /> Algorithms
+                  </h5>
+                  <p className="wd-dashboard-course-description card-text">
+                    Software Development
+                  </p>
+                  <button className="btn btn-primary">Go</button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/1617/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="./images/htmlcss.png" width={200} />
-            <div>
-              <h5>CS1617 HTML & CSS</h5>
-              <p className="wd-dashboard-course-title">Web Design Basics</p>
-              <button>Go</button>
+          </div>
+
+          <div className="wd-dashboard-course" style={{ width: "270px" }}>
+            <div className="card rounded-3 overflow-hidden">
+              <Link
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                to="/Kambaz/Courses/1239/Home"
+              >
+                <img src="/images/java.png" width="100%" height={160} />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1239 <br /> PDP
+                  </h5>
+                  <p className="wd-dashboard-course-description card-text">
+                    Software Development
+                  </p>
+                  <button className="btn btn-primary">Go</button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/1819/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="./images/mongodb.png" width={200} />
-            <div>
-              <h5>CS1819 MongoDB</h5>
-              <p className="wd-dashboard-course-title">
-                NoSQL Database Management
-              </p>
-              <button>Go</button>
+          </div>
+
+          <div className="wd-dashboard-course" style={{ width: "270px" }}>
+            <div className="card rounded-3 overflow-hidden">
+              <Link
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                to="/Kambaz/Courses/1240/Home"
+              >
+                <img src="/images/mongodb.png" width="100%" height={160} />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1240 <br /> MongoDB
+                  </h5>
+                  <p className="wd-dashboard-course-description card-text">
+                    Software Development
+                  </p>
+                  <button className="btn btn-primary">Go</button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/2021/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/devops.png" width={200} />
-            <div>
-              <h5>CS2021 DevOps</h5>
-              <p className="wd-dashboard-course-title">CI/CD & Deployment</p>
-              <button>Go</button>
-            </div>
-          </Link>
+          </div>
         </div>
       </div>
     </div>

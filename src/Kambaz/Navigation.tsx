@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendar, IoSettingsOutline } from "react-icons/io5";
 import { LiaBookSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 export default function KambazNavigation() {
   return (
     <div

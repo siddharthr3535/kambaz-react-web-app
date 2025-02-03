@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
-
-export default function CourseNavigation() {
+export default function CoursesNavigation() {
   return (
     <div id="wd-courses-navigation" className="wd list-group fs-5 rounded-0">
-      <div className="wd-sem-title mb-3 ms-3 me-3">
-        202510_2 Fall 2024 Semester...
-      </div>
+      <div className="wd-sem-title mb-3 ms-3 me-3">2025 Spring Semester.</div>
       <Link
         to="/Kambaz/Courses/1234/Home"
         id="wd-course-home-link"
@@ -45,14 +42,6 @@ export default function CourseNavigation() {
       >
         {" "}
         Assignments{" "}
-      </Link>
-      <Link
-        to="/Kambaz/Courses/1234/Quizzes"
-        id="wd-course-assignments-link"
-        className="list-group-item text-danger border border-0"
-      >
-        {" "}
-        Quizzes{" "}
       </Link>
       <Link
         to="/Kambaz/Courses/1234/Quizzes"
