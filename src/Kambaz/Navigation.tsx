@@ -91,7 +91,7 @@ export default function KambazNavigation() {
         Inbox{" "}
       </Link>
       <Link
-        to="/Kambaz/Labs"
+        to="/Labs"
         id="wd-course-link"
         className={`list-group-item text-center border-0  ${
           pathname.includes("Labs")
