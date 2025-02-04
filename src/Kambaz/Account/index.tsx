@@ -3,9 +3,11 @@ import Profile from "./Profile";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import AccountNavigation from "./Navigation";
+import { Container } from "react-bootstrap";
 export default function Account() {
   return (
-    <div id="wd-account-screen">
+    // <div id="wd-account-screen">
+    <Container>
       <table>
         <tbody>
           {" "}
@@ -28,6 +30,7 @@ export default function Account() {
           </tr>
         </tbody>
       </table>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 }

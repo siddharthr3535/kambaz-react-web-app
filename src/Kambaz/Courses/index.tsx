@@ -6,10 +6,12 @@ import Modules from "./Modules";
 import CoursesNavigation from "./Navigation";
 import { Navigate, Route, Routes } from "react-router";
 import PeopleTable from "./People/Table";
+import { Container } from "react-bootstrap";
 
 export default function Courses() {
   return (
-    <div id="wd-courses">
+    // <div id="wd-courses">
+    <Container>
       <h2 className="text-danger">
         <FaAlignJustify className="me-4 fs-4 mb-1" />
         Course 1234
@@ -34,6 +36,7 @@ export default function Courses() {
           </Routes>
         </div>
       </div>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 }

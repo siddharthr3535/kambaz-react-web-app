@@ -3,6 +3,7 @@ import Account from "./Account";
 import KambazNavigation from "./Navigation";
 import Courses from "./Courses";
 import Dashboard from "./Dashboard";
+
 export default function Kambaz() {
   return (
     <div id="wd-kambaz" className="d-flex">
