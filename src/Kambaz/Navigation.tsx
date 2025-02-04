@@ -3,6 +3,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { FaGear } from "react-icons/fa6";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
+import { LiaBookSolid } from "react-icons/lia";
 export default function KambazNavigation() {
   const { pathname } = useLocation();
   return (
