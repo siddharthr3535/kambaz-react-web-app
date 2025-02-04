@@ -1,15 +1,18 @@
 import { AiOutlineDashboard } from "react-icons/ai";
-import { IoCalendar, IoSettingsOutline } from "react-icons/io5";
-import { LiaBookSolid } from "react-icons/lia";
+import { IoCalendarOutline } from "react-icons/io5";
+import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+import { FaGear } from "react-icons/fa6";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { FaCalendarDays } from "react-icons/fa6";
+import { Link, useLocation } from "react-router-dom";
 export default function KambazNavigation() {
+  const { pathname } = useLocation();
   return (
     <div
       id="wd-Kambaz-navigation"
-      style={{ width: 100, top: "0px" }}
+      style={{ width: 120 }}
       className="list-group rounded-0 position-fixed
-         bottom-0 d-none d-md-block bg-black z-2"
+         bottom-0 top-0 d-none d-md-block bg-black z-2"
     >
       <a
         id="wd-neu-link"
@@ -22,64 +25,85 @@ export default function KambazNavigation() {
       <Link
         to="/Kambaz/Account"
         id="wd-account-link"
-        className="list-group-item text-center border-0 bg-black text-white"
+        className={`list-group-item text-center border-0  ${
+          pathname.includes("Account")
+            ? "bg-white text-danger"
+            : "bg-black text-white"
+        }`}
       >
-        <FaRegCircleUser className="fs-1 text text-white" />
+        <FaRegCircleUser
+          className={`fs-1 ${
+            pathname.includes("Account") ? "text-danger" : "text-white"
+          }`}
+        />
+        <br />
         Account{" "}
       </Link>
-      <br />
       <Link
         to="/Kambaz/Dashboard"
         id="wd-dashboard-link"
-        className="list-group-item text-center border-0
-                   bg-white text-danger"
+        className={`list-group-item text-center border-0  ${
+          pathname.includes("Dashboard")
+            ? "bg-white text-danger"
+            : "bg-black text-white"
+        }`}
       >
         <AiOutlineDashboard className="fs-1 text-danger" />
+        <br />
         Dashboard{" "}
       </Link>
-      <br />
       <Link
-        to="/Kambaz/Dashboard"
+        to="/Kambaz/Courses/1234/home"
         id="wd-course-link"
-        className="list-group-item text-white
-                   bg-black text-center border-0"
+        className={`list-group-item text-center border-0  ${
+          pathname.includes("Courses")
+            ? "bg-white text-danger"
+            : "bg-black text-white"
+        }`}
       >
         <LiaBookSolid className="fs-1 text-danger" />
+        <br />
         Courses{" "}
       </Link>
-      <br />
       <Link
         to="/Kambaz/Calendar"
         id="wd-course-link"
-        className="list-group-item text-white
-                   bg-black text-center border-0"
+        className={`list-group-item text-center border-0  ${
+          pathname.includes("Calendar")
+            ? "bg-white text-danger"
+            : "bg-black text-white"
+        }`}
       >
-        <IoCalendar className="fs-1 text-danger" />
+        <IoCalendarOutline className="fs-1 text-danger" />
+        <br />
         Calendar{" "}
       </Link>
-      <br />
       <Link
         to="/Kambaz/Inbox"
         id="wd-course-link"
-        className="list-group-item text-white
-                   bg-black text-center border-0"
+        className={`list-group-item text-center border-0  ${
+          pathname.includes("Inbox")
+            ? "bg-white text-danger"
+            : "bg-black text-white"
+        }`}
       >
         <FaInbox className="fs-1 text-danger" />
         <br />
-        Inbox
+        Inbox{" "}
       </Link>
-      <br />
       <Link
-        to="/Labs"
+        to="/Kambaz/Labs"
         id="wd-course-link"
-        className="list-group-item text-white
-                   bg-black text-center border-0"
+        className={`list-group-item text-center border-0  ${
+          pathname.includes("Labs")
+            ? "bg-white text-danger"
+            : "bg-black text-white"
+        }`}
       >
-        <IoSettingsOutline className="fs-1 text-danger" />
+        <FaGear className="fs-1 text-danger" />
         <br />
-        Labs
+        Labs{" "}
       </Link>
-      <br />
     </div>
   );
 }
