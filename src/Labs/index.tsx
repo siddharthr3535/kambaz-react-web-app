@@ -7,7 +7,6 @@ import { Container } from "react-bootstrap";
 export default function Labs() {
   return (
     <Container>
-      {/* // <div> */}
       <h2>Siddharth Ramachandran</h2>
       Siddharth's Github:
       <a
@@ -24,7 +23,6 @@ export default function Labs() {
         <Route path="Lab2/*" element={<Lab2 />} />
         <Route path="Lab3" element={<Lab3 />} />
       </Routes>
-      {/* </div> */}
     </Container>
   );
 }
