@@ -11,7 +11,6 @@ export default function Account() {
       <table>
         <tbody>
           {" "}
-          {/* Add <tbody> to wrap the <tr> */}
           <tr>
             <td valign="top">
               <AccountNavigation />
@@ -30,7 +29,6 @@ export default function Account() {
           </tr>
         </tbody>
       </table>
-      {/* </div> */}
     </Container>
   );
 }
