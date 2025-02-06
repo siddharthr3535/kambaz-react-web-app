@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 export default function Signin() {
   return (
     <div id="wd-signin-screen">
@@ -15,10 +16,10 @@ export default function Signin() {
       <br />
       <Link
         id="wd-signin-btn"
-        to="/Kambaz/Account/Profile"
+        to="/Kambaz/Dashboard"
         className="btn btn-primary w-100 mb-2"
       >
-        Sign in{" "}
+        Sign in
       </Link>
       <br />
       <Link id="wd-signup-link" to="/Kambaz/Account/Signup">
