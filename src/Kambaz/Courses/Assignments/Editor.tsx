@@ -23,29 +23,8 @@ export default function Editor() {
               className="form-control mt-2"
               cols={50}
               rows={15}
+              value={`The assignment is available online\n\nSubmit a link to the landing page of your Web application running on Netlify.\n\nThe landing page should include the following:\n\n- Your full name and section\n- Links to each of the lab assignments\n- Link to the Kambaz application\n- Links to all relevant source code repositories\n\nThe Kambaz application should include a link to navigate back to the landing page.`}
             ></textarea>
-            <div className="wd-assignment-editor-textarea-content">
-              The assignment is{" "}
-              <p className="text-danger d-inline">available online</p>
-              <br></br>
-              <br></br>
-              Submit a link to the landing page of your Web application running
-              on Netlify.
-              <br></br>
-              <br></br>
-              The landing page should include the following:
-              <br></br>
-              <br></br>
-              <ul>
-                <li>Your full name and section</li>
-                <li>Links to each of the lab assignments</li>
-                <li>Link to the Kambaz application</li>
-                <li>Links to all relevant source code repositories</li>
-              </ul>
-              <br></br>
-              The Kambaz application should include a link to navigate back to
-              the landing page.
-            </div>
           </div>
         </div>
       </div>
