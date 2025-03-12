@@ -4,10 +4,12 @@ import Profile from "./Profile";
 import Signup from "./Signup";
 import AccountNavigation from "./Navigation";
 import { useSelector } from "react-redux";
+import { Container } from "react-bootstrap";
 export default function Account() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   return (
-    <div id="wd-account-screen">
+    // <div id="wd-account-screen">
+    <Container>
       <div className="d-flex">
         <div className="d-none d-md-block">
           <AccountNavigation />
@@ -32,6 +34,7 @@ export default function Account() {
           </Routes>
         </div>
       </div>
-    </div>
+    </Container>
+    // </div>
   );
 }
