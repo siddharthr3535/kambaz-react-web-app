@@ -1,4 +1,3 @@
-import { courses } from "../Database";
 import { FaAlignJustify } from "react-icons/fa";
 import Assignments from "./Assignments";
 import Editor from "./Assignments/Editor";
@@ -7,7 +6,7 @@ import Modules from "./Modules";
 import CoursesNavigation from "./Navigation";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import PeopleTable from "./People/Table";
-export default function Courses() {
+export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
@@ -18,7 +17,6 @@ export default function Courses() {
         <FaAlignJustify className="me-4 fs-4 mb-1" />
         {course && course.name}
         {pathname.split("/")[4] && ` > ${pathname.split("/")[4]}`}
-        {pathname.split("/")[5] && ` > ${pathname.split("/")[5]}`}
       </h2>
       <hr />
       <div className="d-flex">

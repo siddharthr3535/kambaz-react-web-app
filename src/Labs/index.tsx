@@ -11,7 +11,7 @@ export default function Labs() {
     <Provider store={store}>
       <div id="wd=-labs">
         <h1>Labs</h1>
-        <h2>Vicky Daniel Amalan</h2>
+        <h2> Siddharth Ramachandran</h2>
         <h3>Section: 02</h3>
         <hr></hr>
         <TOC />
