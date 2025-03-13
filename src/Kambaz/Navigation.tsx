@@ -1,10 +1,10 @@
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
-
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
-import { Container, ListGroup } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
+
 export default function KambazNavigation() {
   const { pathname } = useLocation();
   const links = [
@@ -16,12 +16,11 @@ export default function KambazNavigation() {
   ];
 
   return (
-    <Container>
-      <ListGroup
-        id="wd-kambaz-navigation"
-        style={{ width: 120 }}
-        className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
-      >
+    <div
+      className="position-fixed h-100 start-0 top-0 bottom-0 bg-black"
+      style={{ width: "120px", zIndex: 1000 }}
+    >
+      <ListGroup id="wd-kambaz-navigation" className="rounded-0 border-0 h-100">
         <ListGroup.Item
           id="wd-neu-link"
           target="_blank"
@@ -29,7 +28,7 @@ export default function KambazNavigation() {
           action
           className="bg-black border-0 text-center"
         >
-          <img src="/images/NEU.png" width="75px" />
+          <img src="/images/NEU.png" width="75px" alt="NEU Logo" />
         </ListGroup.Item>
         <ListGroup.Item
           as={Link}
@@ -67,6 +66,6 @@ export default function KambazNavigation() {
           </ListGroup.Item>
         ))}
       </ListGroup>
-    </Container>
+    </div>
   );
 }

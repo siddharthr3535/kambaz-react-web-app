@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addModule, updateModule, deleteModule, editModule } from "./reducer";
+import { Container } from "react-bootstrap";
 
 export default function Modules() {
   const { cid } = useParams();
@@ -14,7 +15,8 @@ export default function Modules() {
   const dispatch = useDispatch();
 
   return (
-    <div id="wd-kambaz-modules">
+    // <div id="wd-kambaz-modules">
+    <Container>
       <ModulesControls
         moduleName={moduleName}
         addModule={() => {
@@ -94,6 +96,7 @@ export default function Modules() {
             ))}
         </ul>
       </div>
-    </div>
+      {/* // </div> */}
+    </Container>
   );
 }
