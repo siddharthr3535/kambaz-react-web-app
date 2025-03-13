@@ -46,8 +46,10 @@ export default function Kambaz() {
     );
   };
   const { cid } = useParams();
+  console.log(cid);
   return (
-    <div id="wd-Kambaz" className="d-flex">
+    // <div id="wd-Kambaz" className="d-flex">
+    <Container>
       <div className="d-none d-md-block">
         <KambazNavigation />
       </div>
@@ -98,6 +100,7 @@ export default function Kambaz() {
           <Route path="/Labs" element={<Labs />} />
         </Routes>
       </div>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 }

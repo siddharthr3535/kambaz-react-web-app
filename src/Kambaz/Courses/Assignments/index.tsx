@@ -63,9 +63,10 @@ export default function Assignments() {
                   </div>
                   <AssignmentCOntrolButtons
                     assignmentID={assignment._id}
-                    deleteAssignment={(assignmentID) =>
-                      dispatch(deleteAssignment(assignment._id))
-                    }
+                    deleteAssignment={() => {
+                      console.log("Assignment ID:", assignment._id); // Log the assignment ID
+                      dispatch(deleteAssignment(assignment._id));
+                    }}
                   />
                 </li>
               ))}
