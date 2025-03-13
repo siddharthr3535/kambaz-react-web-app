@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { enroll, unenroll } from "./Account/Enrollments/reducer"; // Assuming you have an enroll action
 import { useState } from "react";
+import { Container } from "react-bootstrap";
 export default function Dashboard({
   courses,
   course,
@@ -51,7 +52,8 @@ export default function Dashboard({
   };
 
   return (
-    <div id="wd-dashboard">
+    // <div id="wd-dashboard">
+    <Container>
       <h1 id="wd-dashboard-title">Dashboard</h1>
       {!isFaculty && (
         <button
@@ -187,6 +189,7 @@ export default function Dashboard({
           })}
         </div>
       </div>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 }
