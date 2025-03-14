@@ -135,8 +135,9 @@ export default function Dashboard({
                         {course.description}
                       </p>
                     </div>
-                    <div className="card-footer mb-0">
+                    <div className="card-footer mb-0 d-flex align-items-center gap-2">
                       <button className="btn btn-primary">Go</button>
+
                       {isFaculty && (
                         <>
                           <button
@@ -144,23 +145,25 @@ export default function Dashboard({
                               event.preventDefault();
                               deleteCourse(course._id);
                             }}
-                            className="btn btn-danger float-end"
+                            className="btn btn-danger"
                             id="wd-delete-course-click"
                           >
                             Delete
                           </button>
+
                           <button
                             id="wd-edit-course-click"
                             onClick={(event) => {
                               event.preventDefault();
                               setCourse(course);
                             }}
-                            className="btn btn-warning me-2 float-end"
+                            className="btn btn-warning"
                           >
                             Edit
                           </button>
                         </>
                       )}
+
                       {!isFaculty && (
                         <button
                           id={
@@ -170,7 +173,7 @@ export default function Dashboard({
                           }
                           className={`btn ${
                             isEnrolled ? "btn-danger" : "btn-success"
-                          } float-end`}
+                          }`}
                           onClick={(event) => {
                             event.preventDefault();
                             isEnrolled
