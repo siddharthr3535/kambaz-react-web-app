@@ -27,7 +27,17 @@ export default function Kambaz() {
       ...course,
       _id: new Date().getTime().toString(),
     };
-    setCourses([...courses, { ...course, ...newCourse }]);
+    setCourses([...courses, newCourse]);
+
+    setCourse({
+      _id: "0",
+      name: "New Course",
+      number: "New Number",
+      startDate: "2024-09-10",
+      endDate: "2024-12-15",
+      imgSource: "/images/reactjs.png",
+      description: "New Description",
+    });
   };
 
   const deleteCourse = (courseId: string) => {
