@@ -13,9 +13,9 @@ import { Container } from "react-bootstrap";
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>(db.courses);
   const [course, setCourse] = useState<any>({
-    _id: "0",
-    name: "New Course",
-    number: "New Number",
+    _id: "RS101",
+    name: "Rocket Science 101",
+    number: "RS4550",
     startDate: "2024-09-10",
     endDate: "2024-12-15",
     imgSource: "/images/reactjs.png",
