@@ -23,16 +23,13 @@ export default function Dashboard({
   const { enrollments } = db;
   const isFaculty = currentUser?.role === "FACULTY";
 
-  // If user is faculty, show all courses; otherwise, only courses the user is enrolled in.
-  const filteredCourses = isFaculty
-    ? courses
-    : courses.filter((course) =>
-        enrollments.some(
-          (enrollment) =>
-            enrollment.user === currentUser._id &&
-            enrollment.course === course._id
-        )
-      );
+  // All users (including faculty) now see only the courses they are enrolled in.
+  const filteredCourses = courses.filter((course) =>
+    enrollments.some(
+      (enrollment) =>
+        enrollment.user === currentUser._id && enrollment.course === course._id
+    )
+  );
 
   return (
     <div className="p-4" id="wd-dashboard">
@@ -51,8 +48,7 @@ export default function Dashboard({
                 id="wd-add-new-course-click"
                 onClick={addNewCourse}
               >
-                {" "}
-                Add{" "}
+                Add
               </button>
               <button
                 className="btn btn-warning float-end me-2"
@@ -81,6 +77,7 @@ export default function Dashboard({
             <hr />
           </>
         )}
+
         <h2 id="wd-dashboard-published">
           Published Courses ({filteredCourses.length})
         </h2>
@@ -113,7 +110,7 @@ export default function Dashboard({
                     >
                       {course.description}
                     </Card.Text>
-                    <Button variant="primary"> Go </Button>
+                    <Button variant="primary">Go</Button>
                     {isFaculty && (
                       <>
                         <button

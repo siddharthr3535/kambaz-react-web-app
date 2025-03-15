@@ -6,14 +6,14 @@ import Modules from "./Modules";
 import CoursesNavigation from "./Navigation";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import PeopleTable from "./People/Table";
-import { Container } from "react-bootstrap";
+
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
   console.log(pathname);
   return (
-    <Container>
+    <div id="wd-courses">
       <h2 className="text-danger">
         <FaAlignJustify className="me-4 fs-4 mb-1" />
         {course && course.name}
@@ -39,6 +39,6 @@ export default function Courses({ courses }: { courses: any[] }) {
           </Routes>
         </div>
       </div>
-    </Container>
+    </div>
   );
 }

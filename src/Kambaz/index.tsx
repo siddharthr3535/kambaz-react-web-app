@@ -8,7 +8,6 @@ import Labs from "../Labs";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import { Container } from "react-bootstrap";
 
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>(db.courses);
@@ -58,8 +57,7 @@ export default function Kambaz() {
   const { cid } = useParams();
   console.log(cid);
   return (
-    // <div id="wd-Kambaz" className="d-flex">
-    <Container>
+    <div id="wd-Kambaz" className="d-flex">
       <div className="d-none d-md-block">
         <KambazNavigation />
       </div>
@@ -110,7 +108,6 @@ export default function Kambaz() {
           <Route path="/Labs" element={<Labs />} />
         </Routes>
       </div>
-      {/* </div> */}
-    </Container>
+    </div>
   );
 }
