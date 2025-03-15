@@ -1,7 +1,16 @@
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
-export default function AssignmentControls() {
+interface AssignmentControlsProps {
+  onAddAssignment: () => void;
+}
+
+export default function AssignmentControls({
+  onAddAssignment,
+}: AssignmentControlsProps) {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   return (
     <div
       id="wd-assignment-controls"
@@ -23,19 +32,25 @@ export default function AssignmentControls() {
         />
       </div>
 
-      <div
-        className="d-flex justify-content-end"
-        style={{ whiteSpace: "nowrap", gap: "10px" }}
-      >
-        <button id="wd-add-module-btn" className="btn btn-outline-secondary">
-          <FaPlus className="me-1" style={{ bottom: "1px" }} />
-          Group
-        </button>
-        <button id="wd-add-module-btn" className="btn btn-danger">
-          <FaPlus className="me-1" style={{ bottom: "1px" }} />
-          Assignment
-        </button>
-      </div>
+      {currentUser?.role === "FACULTY" && (
+        <div
+          className="d-flex justify-content-end"
+          style={{ whiteSpace: "nowrap", gap: "10px" }}
+        >
+          <button id="wd-add-module-btn" className="btn btn-outline-secondary">
+            <FaPlus className="me-1" style={{ bottom: "1px" }} />
+            Group
+          </button>
+          <button
+            id="wd-add-assignment-btn"
+            className="btn btn-danger"
+            onClick={onAddAssignment}
+          >
+            <FaPlus className="me-1" style={{ bottom: "1px" }} />
+            Assignment
+          </button>
+        </div>
+      )}
     </div>
   );
 }

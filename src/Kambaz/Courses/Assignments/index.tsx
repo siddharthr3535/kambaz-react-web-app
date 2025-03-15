@@ -1,21 +1,49 @@
 import { BsGripVertical } from "react-icons/bs";
 import { IoMdArrowDropdown } from "react-icons/io";
-import AssignmentControls from "./AssignmentControls";
 import { IoEllipsisVertical } from "react-icons/io5";
-import AssignmentCOntrolButtons from "./AssignmentControlButtons";
-import { AiOutlinePlus } from "react-icons/ai";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAssignment } from "./reducer";
+import AssignmentEditor from "./AssignmentEditor";
+import { useState } from "react";
+import AssignmentControlButtons from "./AssignmentControlButtons";
+import AssignmentControls from "./AssignmentControls";
+import { useNavigate } from "react-router-dom";
 
 export default function Assignments() {
   const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // State for Assignment Editor
+  const [showEditor, setShowEditor] = useState(false);
+  const [editingAssignment, setEditingAssignment] = useState<any>(null);
+
+  // For non-faculty, navigate to assignment details page
+  const handleNavigate = (assignmentId: string) => {
+    navigate(`/Kambaz/Courses/${cid}/Assignments/${assignmentId}`);
+  };
+
+  // For faculty, open the editor with the selected assignment
+  const handleEditClick = (assignment: any) => {
+    setEditingAssignment(assignment);
+    setShowEditor(true);
+  };
+
+  // When "Add Assignment" is clicked
+  const handleAddAssignment = () => {
+    setEditingAssignment(null);
+    setShowEditor(true);
+  };
+
   return (
     <div id="wd-assignments" className="ms-5">
-      <AssignmentControls />
+      {/* Render AssignmentControls with onAddAssignment prop */}
+      <AssignmentControls onAddAssignment={handleAddAssignment} />
+
       <br />
       <br />
       <ul id="wd-assignment-list" className="list-group rounded-0">
@@ -25,11 +53,11 @@ export default function Assignments() {
             <IoMdArrowDropdown className="fs-4" />
             <b>ASSIGNMENTS</b>
             <IoEllipsisVertical className="fs-4 float-end mt-1" />
-            <AiOutlinePlus className="float-end fs-5 mt-1 me-4" />
             <span className="float-end rounded-5 me-2 border p-1">
               40% of Total
             </span>
           </div>
+
           <ul className="wd-lessons list-group rounded-0">
             {assignments
               .filter((assignment: any) => assignment.course === cid)
@@ -39,68 +67,87 @@ export default function Assignments() {
                   key={assignment._id}
                 >
                   <BsGripVertical className="fs-3 mt-4 me-3" />
-                  <FaRegPenToSquare className="fs-3 mt-4 text-success me-3" />
+
+                  {currentUser?.role === "FACULTY" ? (
+                    <FaRegPenToSquare
+                      className="fs-3 mt-4 text-success me-3"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleEditClick(assignment)}
+                    />
+                  ) : (
+                    <FaRegPenToSquare
+                      className="fs-3 mt-4 text-success me-3"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleNavigate(assignment._id)}
+                    />
+                  )}
+
                   <div className="wd-content-container flex-grow-1 mx-4">
                     <a
                       className="wd-assignment-link wd-disabled-link"
-                      href={`#/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        // For non-faculty, navigate to assignment details
+                        if (currentUser?.role !== "FACULTY") {
+                          handleNavigate(assignment._id);
+                        }
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
                     >
                       {assignment.title}
                     </a>
+
                     <p>
                       <span className="wd-assignment-modules-text">
                         Multiple Modules
                       </span>
                       <span className="wd-assignment-subtext">
                         {" "}
-                        |<b> Not available until</b>{" "}
+                        | <b>Not available until</b>{" "}
                         {formatDate(assignment.availableAfterDate)} |
                         <br />
-                        <b> Due</b> {formatDate(assignment.dueDate)} |{" "}
+                        <b>Due</b> {formatDate(assignment.dueDate)} |{" "}
                         {assignment.points} pts
                       </span>
                     </p>
                   </div>
-                  <AssignmentCOntrolButtons
-                    assignmentID={assignment._id}
-                    deleteAssignment={() => {
-                      console.log("Assignment ID:", assignment._id); // Log the assignment ID
-                      dispatch(deleteAssignment(assignment._id));
-                    }}
-                  />
+
+                  {currentUser?.role === "FACULTY" && (
+                    <AssignmentControlButtons
+                      assignmentID={assignment._id}
+                      deleteAssignment={() =>
+                        dispatch(deleteAssignment(assignment._id))
+                      }
+                    />
+                  )}
                 </li>
               ))}
           </ul>
         </li>
       </ul>
+
+      {showEditor && (
+        <AssignmentEditor
+          show={showEditor}
+          handleClose={() => setShowEditor(false)}
+          editingAssignment={editingAssignment}
+        />
+      )}
     </div>
   );
 }
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const month = monthNames[date.getMonth()];
-  const day = date.getDate();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const ampm = hours >= 12 ? "PM" : "AM";
-  const formattedHour = hours % 12 || 12;
-  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-
-  return `${month} ${day} at ${formattedHour}:${formattedMinutes} ${ampm}`;
+  return date.toLocaleString("en-US", {
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
 }

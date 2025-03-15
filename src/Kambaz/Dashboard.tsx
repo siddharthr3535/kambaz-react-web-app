@@ -23,7 +23,6 @@ export default function Dashboard({
   const { enrollments } = db;
   const isFaculty = currentUser?.role === "FACULTY";
 
-  // All users (including faculty) now see only the courses they are enrolled in.
   const filteredCourses = courses.filter((course) =>
     enrollments.some(
       (enrollment) =>
