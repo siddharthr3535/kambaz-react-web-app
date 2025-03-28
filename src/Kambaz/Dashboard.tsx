@@ -23,13 +23,15 @@ export default function Dashboard({
   const { enrollments } = db;
   const isFaculty = currentUser?.role === "FACULTY";
 
-  const filteredCourses = courses.filter((course) =>
-    enrollments.some(
-      (enrollment) =>
-        enrollment.user === currentUser._id && enrollment.course === course._id
-    )
-  );
-
+  const filteredCourses = isFaculty
+    ? courses
+    : courses.filter((course) =>
+        enrollments.some(
+          (enrollment) =>
+            enrollment.user === currentUser._id &&
+            enrollment.course === course._id
+        )
+      );
   return (
     <div className="p-4" id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1>
