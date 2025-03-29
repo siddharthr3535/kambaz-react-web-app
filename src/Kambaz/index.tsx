@@ -8,10 +8,9 @@ import Labs from "../Labs";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import { useSelector } from "react-redux";
+
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>(db.courses);
-  const { currentUser } = useSelector((state: any) => state.accountReducer); // 👈 Add this
 
   const [course, setCourse] = useState<any>({
     _id: "RS101",
