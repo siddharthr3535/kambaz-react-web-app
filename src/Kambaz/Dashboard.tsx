@@ -16,22 +16,20 @@ export default function Dashboard({
   course: any;
   setCourse: (course: any) => void;
   addNewCourse: () => void;
-  deleteCourse: (course: any) => void;
+  deleteCourse: (courseId: string) => void;
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = db;
   const isFaculty = currentUser?.role === "FACULTY";
 
-  const filteredCourses = isFaculty
-    ? courses
-    : courses.filter((course) =>
-        enrollments.some(
-          (enrollment) =>
-            enrollment.user === currentUser._id &&
-            enrollment.course === course._id
-        )
-      );
+  const filteredCourses = courses.filter((course) =>
+    enrollments.some(
+      (enrollment) =>
+        enrollment.user === currentUser._id && enrollment.course === course._id
+    )
+  );
+
   return (
     <div className="p-4" id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1>
@@ -111,31 +109,42 @@ export default function Dashboard({
                     >
                       {course.description}
                     </Card.Text>
-                    <Button variant="primary">Go</Button>
-                    {isFaculty && (
-                      <>
-                        <button
-                          id="wd-edit-course-click"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            setCourse(course);
-                          }}
-                          className="btn btn-warning me-2 float-end"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={(event) => {
-                            event.preventDefault();
-                            deleteCourse(course._id);
-                          }}
-                          className="btn btn-danger float-end"
-                          id="wd-delete-course-click"
-                        >
-                          Delete
-                        </button>
-                      </>
-                    )}
+
+                    <div className="d-flex justify-content-start gap-2 mt-3">
+                      <Button
+                        variant="primary"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Go
+                      </Button>
+
+                      {isFaculty && (
+                        <>
+                          <Button
+                            variant="warning"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setCourse(course);
+                            }}
+                            id="wd-edit-course-click"
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="danger"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              deleteCourse(course._id);
+                            }}
+                            id="wd-delete-course-click"
+                          >
+                            Delete
+                          </Button>
+                        </>
+                      )}
+                    </div>
                   </Card.Body>
                 </Link>
               </Card>

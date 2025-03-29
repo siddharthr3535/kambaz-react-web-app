@@ -8,35 +8,24 @@ import Labs from "../Labs";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
-
+import { useSelector } from "react-redux";
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>(db.courses);
+  const { currentUser } = useSelector((state: any) => state.accountReducer); // 👈 Add this
+
   const [course, setCourse] = useState<any>({
     _id: "RS101",
-    name: "Rocket Science 101",
+    name: "Rocket Propulsion",
     number: "RS4550",
-    startDate: "2024-09-10",
-    endDate: "2024-12-15",
-    imgSource: "/images/reactjs.png",
+    startDate: "2023-09-10",
+    endDate: "2023-12-15",
     description: "New Description",
   });
-
   const addNewCourse = () => {
-    const newCourse = {
-      ...course,
-      _id: new Date().getTime().toString(),
-    };
-    setCourses([...courses, newCourse]);
-
-    setCourse({
-      _id: "0",
-      name: "New Course",
-      number: "New Number",
-      startDate: "2024-09-10",
-      endDate: "2024-12-15",
-      imgSource: "/images/reactjs.png",
-      description: "New Description",
-    });
+    setCourses([
+      ...courses,
+      { ...course, _id: "RS101", imgSource: "/images/webdev.png" },
+    ]);
   };
 
   const deleteCourse = (courseId: string) => {
