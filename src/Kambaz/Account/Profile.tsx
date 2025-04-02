@@ -2,29 +2,48 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "./reducer";
+import * as client from "./client"; // ✅ import your client API
+
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   const fetchProfile = () => {
     if (!currentUser) return navigate("/Kambaz/Account/Signin");
     setProfile(currentUser);
   };
-  const signout = () => {
+
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
     navigate("/Kambaz/Account/Signin");
   };
+
+  // ✅ Add this handler
+  const updateProfile = async () => {
+    try {
+      const updatedProfile = await client.updateUser(profile);
+      dispatch(setCurrentUser(updatedProfile));
+      alert("Profile updated!");
+    } catch (err) {
+      console.error("Failed to update profile", err);
+      alert("Update failed. Try again.");
+    }
+  };
+
   useEffect(() => {
     fetchProfile();
   }, []);
+
   return (
     <div className="wd-profile-screen">
       <h3>Profile</h3>
       {profile && (
         <div>
           <input
-            defaultValue={profile.username}
+            value={profile.username || ""}
             id="wd-username"
             className="form-control mb-2"
             onChange={(e) =>
@@ -32,7 +51,7 @@ export default function Profile() {
             }
           />
           <input
-            defaultValue={profile.password}
+            value={profile.password || ""}
             id="wd-password"
             className="form-control mb-2"
             onChange={(e) =>
@@ -40,7 +59,7 @@ export default function Profile() {
             }
           />
           <input
-            defaultValue={profile.firstName}
+            value={profile.firstName || ""}
             id="wd-firstname"
             className="form-control mb-2"
             onChange={(e) =>
@@ -48,7 +67,7 @@ export default function Profile() {
             }
           />
           <input
-            defaultValue={profile.lastName}
+            value={profile.lastName || ""}
             id="wd-lastname"
             className="form-control mb-2"
             onChange={(e) =>
@@ -56,28 +75,39 @@ export default function Profile() {
             }
           />
           <input
-            defaultValue={profile.dob}
+            value={profile.dob || ""}
             id="wd-dob"
             className="form-control mb-2"
             onChange={(e) => setProfile({ ...profile, dob: e.target.value })}
             type="date"
           />
           <input
-            defaultValue={profile.email}
+            value={profile.email || ""}
             id="wd-email"
             className="form-control mb-2"
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
           <select
+            value={profile.role || "USER"}
             onChange={(e) => setProfile({ ...profile, role: e.target.value })}
             className="form-control mb-2"
             id="wd-role"
           >
-            <option value="USER">User</option>{" "}
+            <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
-            <option value="FACULTY">Faculty</option>{" "}
+            <option value="FACULTY">Faculty</option>
             <option value="STUDENT">Student</option>
           </select>
+
+          {/* ✅ New Update Button */}
+          <button
+            onClick={updateProfile}
+            className="btn btn-primary w-100 mb-2"
+            id="wd-update-btn"
+          >
+            Update
+          </button>
+
           <button
             onClick={signout}
             className="btn btn-danger w-100 mb-2"

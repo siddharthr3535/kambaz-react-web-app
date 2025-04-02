@@ -1,8 +1,12 @@
 import PathParameters from "./PathParameters";
 import QueryParameters from "./QueryParameter";
 import WorkingWithObjects from "./WorkingWithObjects";
+import WorkingWithArrays from "./WorkingWithArrays";
 import EnvironmentVariables from "./EnvironmentVariables";
 import { Link } from "react-router-dom";
+import HttpClient from "./HttpClient";
+import WorkingWithObjectsAsynchronously from "./WorkingWithObjectsAsychronously";
+import WorkingWithArraysAsynchronously from "./WorkingWithArraysAsychronously";
 
 export default function Lab5() {
   return (
@@ -18,6 +22,10 @@ export default function Lab5() {
       <PathParameters />
       <QueryParameters />
       <WorkingWithObjects />
+      <WorkingWithArrays />
+      <HttpClient />
+      <WorkingWithObjectsAsynchronously />
+      <WorkingWithArraysAsynchronously />
     </div>
   );
 }

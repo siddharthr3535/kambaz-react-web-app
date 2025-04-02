@@ -1,7 +1,7 @@
 import { Button, Card, Col, FormControl, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import * as db from "./Database";
+
 import AccountNavigation from "./Account/Navigation";
 
 export default function Dashboard({
@@ -20,13 +20,18 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = db;
+  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
   const isFaculty = currentUser?.role === "FACULTY";
+  console.log("Dashboard", courses);
+  // console.log(
+  //   "All Courses:",
+  //   courses.map((c) => c._id)
+  // );
 
-  const filteredCourses = courses.filter((course) =>
-    enrollments.some(
+  const filteredCourses = (courses || []).filter((course) =>
+    (enrollments || []).some(
       (enrollment) =>
-        enrollment.user === currentUser._id && enrollment.course === course._id
+        enrollment.user === currentUser?._id && enrollment.course === course._id
     )
   );
 
