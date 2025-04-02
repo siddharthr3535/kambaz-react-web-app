@@ -5,7 +5,7 @@ import { FormControl } from "react-bootstrap";
 export default function WorkingWithObjectsAsynchronously() {
   const [assignment, setAssignment] = useState<any>({});
   const [todos, setTodos] = useState<any[]>([]);
-
+  console.log(todos);
   const fetchAssignment = async () => {
     const assignment = await client.fetchAssignment();
     setAssignment(assignment);
