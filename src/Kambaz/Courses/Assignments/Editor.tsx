@@ -1,29 +1,23 @@
-// import { BsGripVertical } from "react-icons/bs";
-// import { IoMdArrowDropdown } from "react-icons/io";
-// import AssignmentControls from "./AssignmentControls";
-// import { IoEllipsisVertical } from "react-icons/io5";
-// import { FaPlus } from "react-icons/fa";
-// import GreenCheckmark from "./GreenCheckmark";
-// import AssignmentControlButtons from "./AssignmentControlButtons";
 import { IoCloseOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { addAssignment, updateAssignment } from "./reducer";
+import * as assignmentClient from "./client"; // ✅ New: client to call backend
 
 export default function Editor() {
   const { cid, aid } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const isFaculty = currentUser.role === "FACULTY";
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const isFaculty = currentUser.role === "FACULTY";
+
   const [assignment, setAssignment] = useState(() => {
-    const existingAssignment = assignments.find(
-      (assignment: any) => assignment._id === aid
-    );
-    return existingAssignment
-      ? { ...existingAssignment }
+    const existing = assignments.find((a: any) => a._id === aid);
+    return existing
+      ? { ...existing }
       : {
           course: cid,
           title: "",
@@ -34,35 +28,30 @@ export default function Editor() {
           availableUntilDate: "",
         };
   });
-  const dispatch = useDispatch();
-  const handleEdit = () => {
-    navigate(-1);
-  };
-  const handleSave = () => {
+
+  const handleEdit = () => navigate(-1);
+
+  const handleSave = async () => {
     if (assignment._id) {
-      // Dispatch an action to update the existing assignment
-      dispatch(updateAssignment(assignment));
+      const updated = await assignmentClient.updateAssignment(assignment);
+      dispatch(updateAssignment(updated));
     } else {
-      // Dispatch the addAssignment action for a new assignment
-      dispatch(addAssignment(assignment));
+      const created = await assignmentClient.createAssignment(assignment);
+      dispatch(addAssignment(created));
     }
     handleEdit();
   };
-  const handleCancel = () => {
-    handleEdit();
-  };
+
+  const handleCancel = () => handleEdit();
 
   const formatDateTime = (dateString: string | undefined | null): string => {
     if (!dateString) return "";
     const date = new Date(dateString);
-
-    // Format date as YYYY-MM-DDTHH:mm
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
-
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
@@ -77,9 +66,9 @@ export default function Editor() {
             id="wd-name"
             className="form-control mt-2"
             value={assignment.title}
-            onChange={(e) => {
-              setAssignment({ ...assignment, title: e.target.value });
-            }}
+            onChange={(e) =>
+              setAssignment({ ...assignment, title: e.target.value })
+            }
             disabled={!isFaculty}
           />
         </div>
@@ -96,13 +85,12 @@ export default function Editor() {
               className="form-control mt-2"
               cols={50}
               rows={15}
-              onChange={(e) => {
-                setAssignment({ ...assignment, description: e.target.value });
-              }}
+              value={assignment.description}
+              onChange={(e) =>
+                setAssignment({ ...assignment, description: e.target.value })
+              }
               disabled={!isFaculty}
-            >
-              {assignment.description}
-            </textarea>
+            />
           </div>
         </div>
       </div>
@@ -118,9 +106,10 @@ export default function Editor() {
             id="wd-points"
             className="form-control"
             placeholder="100"
-            onChange={(e) => {
-              setAssignment({ ...assignment, points: e.target.value });
-            }}
+            value={assignment.points}
+            onChange={(e) =>
+              setAssignment({ ...assignment, points: e.target.value })
+            }
             disabled={!isFaculty}
           />
         </div>
@@ -186,9 +175,7 @@ export default function Editor() {
               </select>
             </div>
             <div className="mt-4">
-              <span>
-                <b>Online Entry Options</b>
-              </span>
+              <b>Online Entry Options</b>
               <br />
               <br />
               <input id="wd-text-entry" type="checkbox" disabled={!isFaculty} />
@@ -258,7 +245,6 @@ export default function Editor() {
               <input
                 id="wd-assign-to"
                 className="form-control"
-                placeholder=""
                 disabled={!isFaculty}
               />
             </div>
@@ -270,9 +256,9 @@ export default function Editor() {
               className="form-control"
               type="datetime-local"
               value={formatDateTime(assignment.dueDate)}
-              onChange={(e) => {
-                setAssignment({ ...assignment, dueDate: e.target.value });
-              }}
+              onChange={(e) =>
+                setAssignment({ ...assignment, dueDate: e.target.value })
+              }
               disabled={!isFaculty}
             />
             <div className="d-flex">
@@ -286,12 +272,12 @@ export default function Editor() {
                   type="datetime-local"
                   style={{ width: "155px" }}
                   value={formatDateTime(assignment.availableAfterDate)}
-                  onChange={(e) => {
+                  onChange={(e) =>
                     setAssignment({
                       ...assignment,
                       availableAfterDate: e.target.value,
-                    });
-                  }}
+                    })
+                  }
                   disabled={!isFaculty}
                 />
               </div>
@@ -305,12 +291,12 @@ export default function Editor() {
                   type="datetime-local"
                   style={{ width: "155px" }}
                   value={formatDateTime(assignment.availableUntilDate)}
-                  onChange={(e) => {
+                  onChange={(e) =>
                     setAssignment({
                       ...assignment,
                       availableUntilDate: e.target.value,
-                    });
-                  }}
+                    })
+                  }
                   disabled={!isFaculty}
                 />
               </div>
@@ -318,6 +304,7 @@ export default function Editor() {
           </fieldset>
         </div>
       </div>
+
       <hr />
       {isFaculty && (
         <div className="row mt-4">
@@ -325,18 +312,14 @@ export default function Editor() {
             <button
               id="wd-cancel"
               className="btn btn-secondary me-1"
-              onClick={() => {
-                handleCancel();
-              }}
+              onClick={handleCancel}
             >
               Cancel
             </button>
             <button
               id="wd-save"
               className="btn btn-primary btn-danger"
-              onClick={() => {
-                handleSave();
-              }}
+              onClick={handleSave}
             >
               Save
             </button>

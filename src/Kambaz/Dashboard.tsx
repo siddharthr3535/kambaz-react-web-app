@@ -1,7 +1,6 @@
 import { Button, Card, Col, FormControl, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import AccountNavigation from "./Account/Navigation";
 
 export default function Dashboard({
@@ -20,20 +19,7 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
   const isFaculty = currentUser?.role === "FACULTY";
-  console.log("Dashboard", courses);
-  // console.log(
-  //   "All Courses:",
-  //   courses.map((c) => c._id)
-  // );
-
-  const filteredCourses = (courses || []).filter((course) =>
-    (enrollments || []).some(
-      (enrollment) =>
-        enrollment.user === currentUser?._id && enrollment.course === course._id
-    )
-  );
 
   return (
     <div className="p-4" id="wd-dashboard">
@@ -83,11 +69,11 @@ export default function Dashboard({
         )}
 
         <h2 id="wd-dashboard-published">
-          Published Courses ({filteredCourses.length})
+          Published Courses ({courses.length})
         </h2>
         <hr />
         <Row xs={1} md={5} className="g-4">
-          {filteredCourses.map((course) => (
+          {courses.map((course) => (
             <Col
               key={course._id}
               className="wd-dashboard-course"

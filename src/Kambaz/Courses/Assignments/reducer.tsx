@@ -1,38 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../Database";
-const { assignments } = db;
+
+// ✅ Start with empty array, fetch from backend
 const initialState = {
-  assignments: assignments,
+  assignments: [],
 };
+
 const assignmentsSlice = createSlice({
   name: "assignments",
   initialState,
   reducers: {
-    addAssignment: (state, { payload: assignment }) => {
-      const newAssignment: any = {
-        _id: new Date().getTime().toString(),
-        title: assignment.title,
-        course: assignment.course,
-        availableAfterDate: assignment.availableAfterDate,
-        dueDate: assignment.dueDate,
-        availableUntilDate: assignment.availableUntilDate,
-        points: assignment.points,
-        description: assignment.description,
-      };
-      state.assignments = [...state.assignments, newAssignment] as any;
+    // 🔁 Used when you fetch all assignments for a course
+    setAssignments: (state, { payload }) => {
+      state.assignments = payload;
     },
+
+    // ✅ When a new assignment is added (backend returns full assignment with _id)
+    addAssignment: (state, { payload }) => {
+      state.assignments = [...state.assignments, payload];
+    },
+
+    // ✅ Remove assignment by _id
     deleteAssignment: (state, { payload: assignmentID }) => {
       state.assignments = state.assignments.filter(
         (a: any) => a._id !== assignmentID
       );
     },
-    updateAssignment: (state, { payload: assignment }) => {
+
+    // ✅ Replace updated assignment in state
+    updateAssignment: (state, { payload: updated }) => {
       state.assignments = state.assignments.map((a: any) =>
-        a._id === assignment._id ? assignment : a
-      ) as any;
+        a._id === updated._id ? updated : a
+      );
     },
   },
 });
-export const { addAssignment, deleteAssignment, updateAssignment } =
-  assignmentsSlice.actions;
+
+export const {
+  setAssignments,
+  addAssignment,
+  deleteAssignment,
+  updateAssignment,
+} = assignmentsSlice.actions;
+
 export default assignmentsSlice.reducer;
