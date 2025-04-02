@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import { FormControl } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as client from "./client";
 import { setCurrentUser } from "./reducer";
+import { useState } from "react";
 
 export default function Signup() {
   const [user, setUser] = useState<any>({});

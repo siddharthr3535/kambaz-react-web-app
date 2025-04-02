@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FormControl } from "react-bootstrap";
 
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 
 export default function QueryParameters() {
-  const [a, setA] = useState("");
-  const [b, setB] = useState("");
+  const [a, setA] = useState<string>("");
+  const [b, setB] = useState<string>("");
 
   return (
     <div id="wd-query-parameters">
@@ -16,10 +16,7 @@ export default function QueryParameters() {
         className="mb-2"
         type="number"
         value={a}
-        onChange={(e) => {
-          const val = e.target.value;
-          setA(val === "" ? "" : Number(val));
-        }}
+        onChange={(e) => setA(e.target.value)}
       />
 
       <FormControl
@@ -27,10 +24,7 @@ export default function QueryParameters() {
         className="mb-2"
         type="number"
         value={b}
-        onChange={(e) => {
-          const val = e.target.value;
-          setB(val === "" ? "" : Number(val));
-        }}
+        onChange={(e) => setB(e.target.value)}
       />
 
       <a

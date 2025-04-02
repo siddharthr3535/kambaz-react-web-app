@@ -1,7 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// ✅ Start with empty array, fetch from backend
-const initialState = {
+export interface AssignmentType {
+  _id: string;
+  title: string;
+  course: string;
+  description?: string;
+  points?: number;
+  dueDate?: string;
+  availableAfterDate?: string;
+  availableUntilDate?: string;
+}
+
+interface AssignmentState {
+  assignments: AssignmentType[];
+}
+
+// ✅ Initial empty state
+const initialState: AssignmentState = {
   assignments: [],
 };
 
@@ -9,27 +24,20 @@ const assignmentsSlice = createSlice({
   name: "assignments",
   initialState,
   reducers: {
-    // 🔁 Used when you fetch all assignments for a course
-    setAssignments: (state, { payload }) => {
-      state.assignments = payload;
+    setAssignments: (state, action: PayloadAction<AssignmentType[]>) => {
+      state.assignments = action.payload;
     },
-
-    // ✅ When a new assignment is added (backend returns full assignment with _id)
-    addAssignment: (state, { payload }) => {
-      state.assignments = [...state.assignments, payload];
+    addAssignment: (state, action: PayloadAction<AssignmentType>) => {
+      state.assignments.push(action.payload);
     },
-
-    // ✅ Remove assignment by _id
-    deleteAssignment: (state, { payload: assignmentID }) => {
+    deleteAssignment: (state, action: PayloadAction<string>) => {
       state.assignments = state.assignments.filter(
-        (a: any) => a._id !== assignmentID
+        (a) => a._id !== action.payload
       );
     },
-
-    // ✅ Replace updated assignment in state
-    updateAssignment: (state, { payload: updated }) => {
-      state.assignments = state.assignments.map((a: any) =>
-        a._id === updated._id ? updated : a
+    updateAssignment: (state, action: PayloadAction<AssignmentType>) => {
+      state.assignments = state.assignments.map((a) =>
+        a._id === action.payload._id ? action.payload : a
       );
     },
   },
