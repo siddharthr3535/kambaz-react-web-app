@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 
 export default function TOC() {
@@ -38,11 +39,20 @@ export default function TOC() {
       </li>
       <li className="nav-item">
         <a
-          id="wd-a3"
+          id="wd-a4"
           href="#/Labs/Lab4"
           className={`nav-link ${pathname.includes("Lab4") ? "active" : ""}`}
         >
           Lab 4
+        </a>
+      </li>
+      <li className="nav-item">
+        <a
+          id="wd-a5"
+          href="#/Labs/Lab5"
+          className={`nav-link ${pathname.includes("Lab5") ? "active" : ""}`}
+        >
+          Lab 5
         </a>
       </li>
       <li className="nav-item">
@@ -53,10 +63,19 @@ export default function TOC() {
       <li className="nav-item">
         <a
           id="wd-github-source-code"
-          href="https://github.com/siddharthr3535/kambaz-react-web-app"
+          href="https://github.com/siddharthr3535/Kambaz-react-web-app"
           className="nav-link"
         >
-          Github Source Code
+          React App
+        </a>
+      </li>
+      <li className="nav-item">
+        <a
+          id="wd-github-source-code"
+          href="https://github.com/siddharthr3535/Kambaz-node-server-app"
+          className="nav-link"
+        >
+          Node Server App
         </a>
       </li>
       <li className="nav-item">
