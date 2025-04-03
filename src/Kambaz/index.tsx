@@ -15,7 +15,7 @@ import * as enrollmentsClient from "./Account/Enrollments/client";
 import { useState, useEffect } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import { useDispatch, useSelector } from "react-redux";
-import { setEnrollments } from "./Account/Enrollments/reducer"; // ✅ FIXED IMPORT
+import { enroll, setEnrollments } from "./Account/Enrollments/reducer"; // ✅ FIXED IMPORT
 
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -54,11 +54,19 @@ export default function Kambaz() {
     startDate: "2023-09-10",
     endDate: "2023-12-15",
     description: "New Description",
+    imgSource: "/images/angular.png",
   });
 
   const addNewCourse = async () => {
-    const newCourse = await userClient.createCourse(course);
-    setCourses([...courses, newCourse]);
+    try {
+      const newCourse = await userClient.createCourse(course);
+      setCourses((prev) => [...prev, newCourse]);
+
+      await enrollmentsClient.enrollUser(newCourse._id);
+      dispatch(enroll({ user: currentUser._id, course: newCourse._id }));
+    } catch (err) {
+      console.error("Failed to add and enroll in new course", err);
+    }
   };
 
   const deleteCourse = async (courseId: string) => {
