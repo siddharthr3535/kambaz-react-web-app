@@ -10,25 +10,40 @@ import Session from "./Account/Session";
 
 import * as userClient from "./Account/client";
 import Labs from "../Labs";
+import * as enrollmentsClient from "./Account/Enrollments/client";
 
 import { useState, useEffect } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setEnrollments } from "./Account/Enrollments/reducer"; // ✅ FIXED IMPORT
 
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>([]);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const dispatch = useDispatch();
+
   const fetchCourses = async () => {
     try {
-      const courses = await userClient.findMyCourses();
+      const courses = await userClient.findAllCourses();
       setCourses(courses);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to fetch courses", error);
     }
   };
+
   useEffect(() => {
+    const fetchEnrollments = async () => {
+      try {
+        const enrollments = await enrollmentsClient.fetchEnrollmentsForUser();
+        dispatch(setEnrollments(enrollments));
+      } catch (err) {
+        console.error("Failed to fetch enrollments", err);
+      }
+    };
+
     if (currentUser) {
       fetchCourses();
+      fetchEnrollments();
     }
   }, [currentUser]);
 
@@ -40,6 +55,7 @@ export default function Kambaz() {
     endDate: "2023-12-15",
     description: "New Description",
   });
+
   const addNewCourse = async () => {
     const newCourse = await userClient.createCourse(course);
     setCourses([...courses, newCourse]);
@@ -53,19 +69,12 @@ export default function Kambaz() {
 
   const updateCourse = async () => {
     await courseClient.updateCourse(course);
-
-    setCourses(
-      courses.map((c) => {
-        if (c._id === course._id) {
-          return course;
-        } else {
-          return c;
-        }
-      })
-    );
+    setCourses(courses.map((c) => (c._id === course._id ? course : c)));
   };
+
   const { cid } = useParams();
   console.log(cid);
+
   return (
     <Session>
       <div id="wd-Kambaz" className="d-flex">
