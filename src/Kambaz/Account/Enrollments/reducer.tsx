@@ -1,6 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+interface Enrollment {
+  _id: string;
+  user: string;
+  course: string;
+}
+
+interface EnrollmentState {
+  enrollments: Enrollment[];
+}
+
+const initialState: EnrollmentState = {
   enrollments: [],
 };
 
@@ -8,19 +18,22 @@ const enrollmentSlice = createSlice({
   name: "enrollments",
   initialState,
   reducers: {
-    setEnrollments: (state, action) => {
+    setEnrollments: (state, action: PayloadAction<Enrollment[]>) => {
       state.enrollments = action.payload;
     },
-    enroll: (state, { payload }) => {
+    enroll: (
+      state,
+      action: PayloadAction<{ user: string; course: string }>
+    ) => {
       state.enrollments.push({
         _id: new Date().getTime().toString(), // temp ID
-        user: payload.user,
-        course: payload.course,
+        user: action.payload.user,
+        course: action.payload.course,
       });
     },
-    unenroll: (state, { payload: enrollmentId }) => {
+    unenroll: (state, action: PayloadAction<string>) => {
       state.enrollments = state.enrollments.filter(
-        (e: any) => e._id !== enrollmentId
+        (e) => e._id !== action.payload
       );
     },
   },
