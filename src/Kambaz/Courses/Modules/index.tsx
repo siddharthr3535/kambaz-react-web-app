@@ -56,6 +56,7 @@ export default function Modules() {
     await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
+  console.log(removeModule);
 
   return (
     <div id="wd-modules">
