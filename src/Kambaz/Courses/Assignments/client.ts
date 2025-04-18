@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const ASSIGNMENTS_API = `${import.meta.env.VITE_REMOTE_SERVER}/api/assignments`;
+const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
+const ASSIGNMENTS_API = `${REMOTE_SERVER}/api/assignments`;
 
 export const fetchAssignments = async () => {
   const { data } = await axios.get(ASSIGNMENTS_API);
@@ -24,6 +25,7 @@ export const deleteAssignment = async (assignmentId: string) => {
   const { data } = await axios.delete(`${ASSIGNMENTS_API}/${assignmentId}`);
   return data;
 };
+
 export const findAssignmentsForCourse = async (courseId: string) => {
   const { data } = await axios.get(`${ASSIGNMENTS_API}/course/${courseId}`);
   return data;
