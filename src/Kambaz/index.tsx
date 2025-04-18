@@ -71,6 +71,7 @@ export default function Kambaz() {
     const fetchEnrollments = async () => {
       try {
         const enrollments = await enrollmentsClient.fetchEnrollmentsForUser();
+        console.log("dei please da ", enrollments);
         dispatch(setEnrollments(enrollments));
       } catch (err) {
         console.error("Failed to fetch enrollments", err);
