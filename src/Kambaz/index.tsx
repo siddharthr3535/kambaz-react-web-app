@@ -106,6 +106,7 @@ export default function Kambaz() {
   }, [currentUser, enrolling, dispatch]);
 
   const { cid } = useParams();
+  console.log(cid);
 
   return (
     <Session>
