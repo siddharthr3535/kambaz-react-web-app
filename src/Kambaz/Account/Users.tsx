@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import PeopleTable from "../Courses/People/Table";
 import * as client from "./client";
+import * as courseclient from "../Courses/client";
 import { FormControl } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
 
@@ -10,9 +11,14 @@ export default function Users() {
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
   const { uid } = useParams();
-
+  console.log("Users", uid);
   const fetchUsers = async () => {
-    const users = await client.findAllUsers();
+    if (!uid) {
+      console.warn("⛔️ No UID present for fetching users");
+      return;
+    }
+    console.log("boss are you here");
+    const users = await courseclient.findUsersForCourse(uid);
     setUsers(users);
   };
 
@@ -50,7 +56,16 @@ export default function Users() {
   };
 
   useEffect(() => {
-    fetchUsers();
+    const fetch = async () => {
+      if (uid) {
+        const users = await courseclient.findUsersForCourse(uid);
+        setUsers(users);
+      } else {
+        const users = await client.findAllUsers();
+        setUsers(users);
+      }
+    };
+    fetch();
   }, [uid]);
 
   return (

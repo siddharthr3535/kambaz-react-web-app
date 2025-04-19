@@ -18,75 +18,9 @@ import { enroll, setEnrollments } from "./Account/Enrollments/reducer";
 
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>([]);
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const dispatch = useDispatch();
   const [enrolling, setEnrolling] = useState<boolean>(false);
-
-  const findCoursesForUser = async () => {
-    try {
-      const userCourses = await userClient.findCoursesForUser(currentUser._id);
-      setCourses(userCourses);
-    } catch (error) {
-      console.error("Failed to fetch user's courses", error);
-    }
-  };
-  const updateEnrollment = async (courseId: string, enrolled: boolean) => {
-    if (enrolled) {
-      await userClient.enrollIntoCourse(currentUser._id, courseId);
-    } else {
-      await userClient.unenrollFromCourse(currentUser._id, courseId);
-    }
-    setCourses(
-      courses.map((course) => {
-        if (course._id === courseId) {
-          return { ...course, enrolled: enrolled };
-        } else {
-          return course;
-        }
-      })
-    );
-  };
-
-  const fetchCourses = async () => {
-    try {
-      const allCourses = await courseClient.fetchAllCourses();
-      const enrolledCourses = await userClient.findCoursesForUser(
-        currentUser._id
-      );
-
-      const coursesWithEnrollFlag = allCourses.map((course: any) => {
-        const isEnrolled = enrolledCourses.some(
-          (c: any) => c._id === course._id
-        );
-        return { ...course, enrolled: isEnrolled };
-      });
-
-      setCourses(coursesWithEnrollFlag);
-    } catch (error) {
-      console.error("Failed to fetch courses", error);
-    }
-  };
-
-  useEffect(() => {
-    const fetchEnrollments = async () => {
-      try {
-        const enrollments = await enrollmentsClient.fetchEnrollmentsForUser();
-        console.log("dei please da ", enrollments);
-        dispatch(setEnrollments(enrollments));
-      } catch (err) {
-        console.error("Failed to fetch enrollments", err);
-      }
-    };
-
-    if (currentUser) {
-      if (enrolling) {
-        fetchCourses();
-      } else {
-        findCoursesForUser();
-      }
-      fetchEnrollments();
-    }
-  }, [currentUser, enrolling]);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   const [course, setCourse] = useState<any>({
     _id: "RS101",
@@ -98,31 +32,80 @@ export default function Kambaz() {
     imgSource: "/images/angular.png",
   });
 
-  const addNewCourse = async () => {
-    try {
-      const newCourse = await courseClient.createCourse(course);
-      setCourses((prev) => [...prev, newCourse]);
+  const fetchEnrolledCourses = async () => {
+    const userCourses = await userClient.findCoursesForUser(currentUser._id);
 
-      await enrollmentsClient.enrollUser(newCourse._id);
-      dispatch(enroll({ user: currentUser._id, course: newCourse._id }));
-    } catch (err) {
-      console.error("Failed to add and enroll in new course", err);
+    const enrolledCourses = userCourses.map((course: any) => ({
+      ...course,
+      enrolled: true,
+    }));
+    setCourses(enrolledCourses);
+  };
+
+  const fetchAllCoursesWithEnrollFlag = async () => {
+    const allCourses = await courseClient.fetchAllCourses();
+    const enrolledCourses = await userClient.findCoursesForUser(
+      currentUser._id
+    );
+    const coursesWithEnrollFlag = allCourses.map((course: any) => {
+      const isEnrolled = enrolledCourses.some((c: any) => c._id === course._id);
+      return { ...course, enrolled: isEnrolled };
+    });
+    setCourses(coursesWithEnrollFlag);
+  };
+
+  const updateEnrollment = async (courseId: string, enrolled: boolean) => {
+    if (enrolled) {
+      await userClient.enrollIntoCourse(currentUser._id, courseId);
+    } else {
+      await userClient.unenrollFromCourse(currentUser._id, courseId);
     }
+    setCourses((prevCourses) =>
+      prevCourses.map((course) =>
+        course._id === courseId ? { ...course, enrolled } : course
+      )
+    );
+  };
+
+  const addNewCourse = async () => {
+    const newCourse = await courseClient.createCourse(course);
+    setCourses((prev) => [...prev, newCourse]);
+    await enrollmentsClient.enrollUser(newCourse._id);
+    dispatch(enroll({ user: currentUser._id, course: newCourse._id }));
   };
 
   const deleteCourse = async (courseId: string) => {
-    const status = await courseClient.deleteCourse(courseId);
-    console.log("status", status);
-    setCourses(courses.filter((course) => course._id !== courseId));
+    await courseClient.deleteCourse(courseId);
+    setCourses((prev) => prev.filter((course) => course._id !== courseId));
   };
 
   const updateCourse = async () => {
     await courseClient.updateCourse(course);
-    setCourses(courses.map((c) => (c._id === course._id ? course : c)));
+    setCourses((prev) => prev.map((c) => (c._id === course._id ? course : c)));
   };
 
+  useEffect(() => {
+    if (!currentUser) return;
+
+    const fetchData = async () => {
+      try {
+        if (enrolling) {
+          await fetchAllCoursesWithEnrollFlag();
+        } else {
+          await fetchEnrolledCourses();
+        }
+
+        const enrollments = await enrollmentsClient.fetchEnrollmentsForUser();
+        dispatch(setEnrollments(enrollments));
+      } catch (err) {
+        console.error("Failed to load dashboard data:", err);
+      }
+    };
+
+    fetchData();
+  }, [currentUser, enrolling, dispatch]);
+
   const { cid } = useParams();
-  console.log(cid);
 
   return (
     <Session>

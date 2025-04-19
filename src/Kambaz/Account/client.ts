@@ -11,6 +11,7 @@ export const findMyCourses = async () => {
   const { data } = await axiosWithCredentials.get(
     `${USERS_API}/current/courses`
   );
+  console.log("find my course ", data);
   return data;
 };
 

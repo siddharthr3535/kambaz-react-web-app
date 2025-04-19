@@ -4,7 +4,7 @@ import PeopleDetails from "./Details";
 
 export default function PeopleTable({ users = [] }: { users?: any[] }) {
   const { uid } = useParams();
-
+  console.log("PeopleTable", users);
   return (
     <div id="wd-people-table">
       {uid && <PeopleDetails />}
